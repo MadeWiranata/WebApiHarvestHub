@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\madea\\source\\repos\\WebApiHarvestHub\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{46182870-30A8-4C64-BD1C-9D828AA20EDD}|WebApiHarvestHub\\WebApiHarvestHub.csproj|c:\\users\\madea\\source\\repos\\webapiharvesthub\\webapiharvesthub\\repositorys\\implements\\master\\worktaskrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46182870-30A8-4C64-BD1C-9D828AA20EDD}|WebApiHarvestHub\\WebApiHarvestHub.csproj|solutionrelative:webapiharvesthub\\repositorys\\implements\\master\\worktaskrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46182870-30A8-4C64-BD1C-9D828AA20EDD}|WebApiHarvestHub\\WebApiHarvestHub.csproj|c:\\users\\madea\\source\\repos\\webapiharvesthub\\webapiharvesthub\\controllers\\master\\worktaskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46182870-30A8-4C64-BD1C-9D828AA20EDD}|WebApiHarvestHub\\WebApiHarvestHub.csproj|solutionrelative:webapiharvesthub\\controllers\\master\\worktaskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46182870-30A8-4C64-BD1C-9D828AA20EDD}|WebApiHarvestHub\\WebApiHarvestHub.csproj|c:\\users\\madea\\source\\repos\\webapiharvesthub\\webapiharvesthub\\model\\master\\worktask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46182870-30A8-4C64-BD1C-9D828AA20EDD}|WebApiHarvestHub\\WebApiHarvestHub.csproj|solutionrelative:webapiharvesthub\\model\\master\\worktask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46182870-30A8-4C64-BD1C-9D828AA20EDD}|WebApiHarvestHub\\WebApiHarvestHub.csproj|c:\\users\\madea\\source\\repos\\webapiharvesthub\\webapiharvesthub\\repositorys\\implements\\master\\fieldrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46182870-30A8-4C64-BD1C-9D828AA20EDD}|WebApiHarvestHub\\WebApiHarvestHub.csproj|solutionrelative:webapiharvesthub\\repositorys\\implements\\master\\fieldrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FieldRepo.cs",
+              "DocumentMoniker": "C:\\Users\\madea\\source\\repos\\WebApiHarvestHub\\WebApiHarvestHub\\Repositorys\\Implements\\Master\\FieldRepo.cs",
+              "RelativeDocumentMoniker": "WebApiHarvestHub\\Repositorys\\Implements\\Master\\FieldRepo.cs",
+              "ToolTip": "C:\\Users\\madea\\source\\repos\\WebApiHarvestHub\\WebApiHarvestHub\\Repositorys\\Implements\\Master\\FieldRepo.cs",
+              "RelativeToolTip": "WebApiHarvestHub\\Repositorys\\Implements\\Master\\FieldRepo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T08:43:50.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WorkTaskRepo.cs",
+              "DocumentMoniker": "C:\\Users\\madea\\source\\repos\\WebApiHarvestHub\\WebApiHarvestHub\\Repositorys\\Implements\\Master\\WorkTaskRepo.cs",
+              "RelativeDocumentMoniker": "WebApiHarvestHub\\Repositorys\\Implements\\Master\\WorkTaskRepo.cs",
+              "ToolTip": "C:\\Users\\madea\\source\\repos\\WebApiHarvestHub\\WebApiHarvestHub\\Repositorys\\Implements\\Master\\WorkTaskRepo.cs",
+              "RelativeToolTip": "WebApiHarvestHub\\Repositorys\\Implements\\Master\\WorkTaskRepo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T08:43:47.798Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "WorkTaskController.cs",
+              "DocumentMoniker": "C:\\Users\\madea\\source\\repos\\WebApiHarvestHub\\WebApiHarvestHub\\Controllers\\Master\\WorkTaskController.cs",
+              "RelativeDocumentMoniker": "WebApiHarvestHub\\Controllers\\Master\\WorkTaskController.cs",
+              "ToolTip": "C:\\Users\\madea\\source\\repos\\WebApiHarvestHub\\WebApiHarvestHub\\Controllers\\Master\\WorkTaskController.cs",
+              "RelativeToolTip": "WebApiHarvestHub\\Controllers\\Master\\WorkTaskController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T08:42:46.067Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WorkTask.cs",
+              "DocumentMoniker": "C:\\Users\\madea\\source\\repos\\WebApiHarvestHub\\WebApiHarvestHub\\Model\\Master\\WorkTask.cs",
+              "RelativeDocumentMoniker": "WebApiHarvestHub\\Model\\Master\\WorkTask.cs",
+              "ToolTip": "C:\\Users\\madea\\source\\repos\\WebApiHarvestHub\\WebApiHarvestHub\\Model\\Master\\WorkTask.cs",
+              "RelativeToolTip": "WebApiHarvestHub\\Model\\Master\\WorkTask.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAmwB0AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T08:36:28.117Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
