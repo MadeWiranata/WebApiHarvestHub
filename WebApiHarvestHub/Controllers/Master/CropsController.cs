@@ -100,7 +100,7 @@ namespace WebApiHarvestHub.Controllers.Master
             }
         }
 
-        [AllowAnonymous]
+        [Authorize(Policy = "RequireAdmin")]
         [HttpGet("get_all_filter_by")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Crops>))]
         public async Task<IActionResult> GetAllFilterBy(string FarmCropsName, bool? IsDeleted, string sortBy, bool ascending)
@@ -164,10 +164,9 @@ namespace WebApiHarvestHub.Controllers.Master
         }
 
         [Authorize(Policy = "RequireAdmin")]
-        [HttpPost("update")]
+        [HttpPut("update")]
         public async Task<IActionResult> Update(Crops obj)
         {
-            string userby = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
             try
             {
                 var results = new Crops();
@@ -185,6 +184,27 @@ namespace WebApiHarvestHub.Controllers.Master
             {
                 var st = StTrans.SetSt(400, 0, e.Message);
                 return BadRequest(new { Status = st });
+            }
+        }
+        [Authorize(Policy = "RequireAdmin")]
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete(DeleteCrops del)
+        {
+            try
+            {
+                using (_context = new DapperContext())
+                {
+                    _uow = new UnitOfWork(_context);
+                    await _uow.CropsRepo.Delete(del.UserId, del.CropId);
+                }
+
+                var st = StTrans.SetSt(200, 0, "Succes");
+                return Ok(new { Status = st, Results = del });
+            }
+            catch (System.Exception e)
+            {
+                var st = StTrans.SetSt(400, 0, e.Message);
+                return Ok(new { Status = st });
             }
         }
     }

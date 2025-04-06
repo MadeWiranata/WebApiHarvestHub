@@ -5,5 +5,6 @@ namespace WebApiHarvestHub.Repositorys.Interfaces.Master
     public interface IWorkTaskRepo : IBaseShowRepository<WorkTask>, IBaseSaveRepository<WorkTaskSave>
     {
         Task<IEnumerable<WorkTask>> GetAllFilterBy(WorkTaskListFilterBy obj, string sortBy, bool ascending);
+        Task<bool> Delete(int UserId, int WorkTaskId);
     }
 }

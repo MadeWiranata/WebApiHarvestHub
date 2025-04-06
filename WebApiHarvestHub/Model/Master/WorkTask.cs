@@ -43,4 +43,9 @@ namespace WebApiHarvestHub.Model.Master
         public bool IsCancelled { get; set; }
 
     }
+    public class DeleteWorksTask
+    {
+        public int UserId { get; set; }
+        public int WorkTaskId { get; set; }
+    }
 }

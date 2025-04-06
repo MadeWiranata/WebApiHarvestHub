@@ -25,10 +25,15 @@ namespace WebApiHarvestHub.Model.Master
         public int FarmSiteId { get; set; }
         public int FarmFieldId { get; set; }
         public string FarmFieldName { get; set; }
-        public string FarmFieldCode { get; set; }
-        public float RowWidth { get; set; }
-        public string FarmFieldRowDirection { get; set; }
-        public string FarmFieldColorHexCode { get; set; }    
+        public string? FarmFieldCode { get; set; }
+        public float? RowWidth { get; set; }
+        public string? FarmFieldRowDirection { get; set; }
+        public string? FarmFieldColorHexCode { get; set; }    
 
+    }
+    public class DeleteField
+    {
+        public int UserId { get; set; }
+        public int FarmFieldId { get; set; }
     }
 }

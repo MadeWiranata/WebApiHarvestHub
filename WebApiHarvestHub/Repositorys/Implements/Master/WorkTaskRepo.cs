@@ -88,53 +88,13 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
             return obj;
         }
 
-        public async Task<IEnumerable<WorkTask>> GetByName(string name)
-        {
-            IEnumerable<WorkTask> oList = Enumerable.Empty<WorkTask>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.FarmFieldCode = @name");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.FarmFieldCode");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { name });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
-
-        public async Task<IEnumerable<WorkTask>> GetByStatus(bool IsDeleted)
-        {
-            IEnumerable<WorkTask> oList = Enumerable.Empty<WorkTask>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.IsDeleted = @IsDeleted");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.FarmFieldCode");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { IsDeleted });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
-
         public async Task<IEnumerable<WorkTask>> GetAll()
         {
             IEnumerable<WorkTask> oList = Enumerable.Empty<WorkTask>();
 
             try
             {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "");
+                _sql = SQL_TEMPLATE.Replace("{WHERE}", " WHERE A.IsDeleted = 0 ");
                 _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.FarmFieldCode");
                 _sql = _sql.Replace("{OFFSET}", "");
 
@@ -207,6 +167,14 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
                 _context.Rollback();
                 throw;
             }
+        }
+
+        public async Task<bool> Delete(int Userid, int WorkTaskId)
+        {
+            await _context.db.QueryAsync("Update WorkTasks set IsDeleted = 1, ModifiedUserId = @userid, ModifiedDate = @tgl Where WorkTaskId = @WorkTaskId",
+                    new { tgl = DateTime.Now, userid = Userid, WorkTaskId = WorkTaskId });
+
+            return true;
         }
     }
 }

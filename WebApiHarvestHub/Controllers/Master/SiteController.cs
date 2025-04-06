@@ -9,7 +9,7 @@ using WebApiHarvestHub.Repositorys.Interfaces;
 namespace WebApiHarvestHub.Controllers.Master
 {
    
-        public interface ISiteController : IBaseApiController<Site>
+        public interface ISiteController : IBaseApiController<SiteSave>
         {
             Task<IActionResult> GetByID(int id);        
             Task<IActionResult> GetAllFilterBy(string FarmSiteName,
@@ -101,7 +101,7 @@ namespace WebApiHarvestHub.Controllers.Master
                 }
             }
 
-        [AllowAnonymous]
+        [Authorize(Policy = "RequireAdmin")]
         [HttpGet("get_all_filter_by")]
             [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Site>))]
             public async Task<IActionResult> GetAllFilterBy(string FarmSiteName, bool? IsDeleted, string sortBy, bool ascending)
@@ -142,11 +142,11 @@ namespace WebApiHarvestHub.Controllers.Master
 
             [Authorize(Policy = "RequireAdmin")]
             [HttpPost("save")]
-            public async Task<IActionResult> Save(Site obj)
+            public async Task<IActionResult> Save(SiteSave obj)
             {           
                 try
                 {
-                    var results = new Site();
+                    var results = new SiteSave();
                     using (_context = new DapperContext())
                     {
                         _uow = new UnitOfWork(_context);                   
@@ -165,13 +165,12 @@ namespace WebApiHarvestHub.Controllers.Master
             }
 
             [Authorize(Policy = "RequireAdmin")]
-            [HttpPost("update")]
-            public async Task<IActionResult> Update(Site obj)
-            {
-                string userby = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+            [HttpPut("update")]
+            public async Task<IActionResult> Update(SiteSave obj)
+            {            
                 try
                 {
-                    var results = new Site();
+                    var results = new SiteSave();
                     using (_context = new DapperContext())
                     {
                         _uow = new UnitOfWork(_context);                   
@@ -186,6 +185,27 @@ namespace WebApiHarvestHub.Controllers.Master
                 {
                     var st = StTrans.SetSt(400, 0, e.Message);
                     return BadRequest(new { Status = st });
+                }
+            }
+            [Authorize(Policy = "RequireAdmin")]
+            [HttpDelete("delete")]
+            public async Task<IActionResult> Delete(DeleteSite del)
+            {           
+                try
+                {
+                    using (_context = new DapperContext())
+                    {
+                        _uow = new UnitOfWork(_context);
+                        await _uow.SiteRepo.Delete(del.UserId, del.FarmSiteId);
+                    }
+
+                    var st = StTrans.SetSt(200, 0, "Succes");
+                    return Ok(new { Status = st, Results = del });
+                }
+                catch (System.Exception e)
+                {
+                    var st = StTrans.SetSt(400, 0, e.Message);
+                    return Ok(new { Status = st });
                 }
             }
         }

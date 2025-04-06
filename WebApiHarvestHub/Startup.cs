@@ -45,7 +45,7 @@ namespace WebApiHarvestHub
             services.AddSingleton<IDapperContext, DapperContext>();         
             services.AddCors(option => option.AddPolicy("CorsPolicy", builder =>
             {
-                builder.WithOrigins("https://localhost:7172", "http://192.168.207.48:7171", "https://192.168.207.48:7172")
+                builder.WithOrigins("https://localhost:2222", "http://192.168.207.48:2323", "https://192.168.207.48:2222")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials();
@@ -114,8 +114,8 @@ namespace WebApiHarvestHub
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiHarvestHub v1"));
-            }        
-
+            }
+           
             app.UseCors(x => x.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
             app.UseCors("CorsPolicy");
 

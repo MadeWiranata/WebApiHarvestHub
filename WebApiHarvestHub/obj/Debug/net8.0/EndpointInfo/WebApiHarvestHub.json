@@ -187,7 +187,7 @@
       }
     },
     "/HarvestHubApi/Crops/update": {
-      "post": {
+      "put": {
         "tags": [
           "Crops"
         ],
@@ -211,6 +211,42 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Crops"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/HarvestHubApi/Crops/delete": {
+      "delete": {
+        "tags": [
+          "Crops"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteCrops"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteCrops"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteCrops"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteCrops"
               }
             }
           }
@@ -404,7 +440,7 @@
       }
     },
     "/HarvestHubApi/Field/update": {
-      "post": {
+      "put": {
         "tags": [
           "Field"
         ],
@@ -439,6 +475,42 @@
         }
       }
     },
+    "/HarvestHubApi/Field/delete": {
+      "delete": {
+        "tags": [
+          "Field"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteField"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteField"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteField"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteField"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/HarvestHubApi/Login/Save": {
       "post": {
         "tags": [
@@ -448,22 +520,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/Login"
+                "$ref": "#/components/schemas/LoginSave"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Login"
+                "$ref": "#/components/schemas/LoginSave"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Login"
+                "$ref": "#/components/schemas/LoginSave"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Login"
+                "$ref": "#/components/schemas/LoginSave"
               }
             }
           }
@@ -476,7 +548,7 @@
       }
     },
     "/HarvestHubApi/Login/update": {
-      "post": {
+      "put": {
         "tags": [
           "Login"
         ],
@@ -484,22 +556,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/Login"
+                "$ref": "#/components/schemas/LoginSave"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Login"
+                "$ref": "#/components/schemas/LoginSave"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Login"
+                "$ref": "#/components/schemas/LoginSave"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Login"
+                "$ref": "#/components/schemas/LoginSave"
               }
             }
           }
@@ -765,7 +837,7 @@
       }
     },
     "/HarvestHubApi/Login/delete": {
-      "post": {
+      "delete": {
         "tags": [
           "Login"
         ],
@@ -954,22 +1026,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/Site"
+                "$ref": "#/components/schemas/SiteSave"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Site"
+                "$ref": "#/components/schemas/SiteSave"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Site"
+                "$ref": "#/components/schemas/SiteSave"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Site"
+                "$ref": "#/components/schemas/SiteSave"
               }
             }
           }
@@ -982,7 +1054,7 @@
       }
     },
     "/HarvestHubApi/Site/update": {
-      "post": {
+      "put": {
         "tags": [
           "Site"
         ],
@@ -990,22 +1062,58 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/Site"
+                "$ref": "#/components/schemas/SiteSave"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Site"
+                "$ref": "#/components/schemas/SiteSave"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Site"
+                "$ref": "#/components/schemas/SiteSave"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Site"
+                "$ref": "#/components/schemas/SiteSave"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/HarvestHubApi/Site/delete": {
+      "delete": {
+        "tags": [
+          "Site"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteSite"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteSite"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteSite"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteSite"
               }
             }
           }
@@ -1199,7 +1307,7 @@
       }
     },
     "/HarvestHubApi/TaskTypes/update": {
-      "post": {
+      "put": {
         "tags": [
           "TaskTypes"
         ],
@@ -1223,6 +1331,42 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/TaskTypes"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/HarvestHubApi/TaskTypes/delete": {
+      "delete": {
+        "tags": [
+          "TaskTypes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteTaskTypes"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteTaskTypes"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteTaskTypes"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteTaskTypes"
               }
             }
           }
@@ -1416,7 +1560,7 @@
       }
     },
     "/HarvestHubApi/WorkTask/update": {
-      "post": {
+      "put": {
         "tags": [
           "WorkTask"
         ],
@@ -1440,6 +1584,42 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/WorkTaskSave"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/HarvestHubApi/WorkTask/delete": {
+      "delete": {
+        "tags": [
+          "WorkTask"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteWorksTask"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteWorksTask"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteWorksTask"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteWorksTask"
               }
             }
           }
@@ -1507,10 +1687,80 @@
         },
         "additionalProperties": false
       },
+      "DeleteCrops": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cropId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteField": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "farmFieldId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteSite": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "farmSiteId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteTaskTypes": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "workTaskTypeCode": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "DeleteUser": {
         "type": "object",
         "properties": {
           "userId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteWorksTask": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "workTaskId": {
             "type": "integer",
             "format": "int32"
           }
@@ -1618,7 +1868,8 @@
           },
           "rowWidth": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "nullable": true
           },
           "farmFieldRowDirection": {
             "type": "string",
@@ -1632,6 +1883,68 @@
         "additionalProperties": false
       },
       "Login": {
+        "type": "object",
+        "properties": {
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "modifiedUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isCustomerUser": {
+            "type": "boolean"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "userPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "userGivenName": {
+            "type": "string",
+            "nullable": true
+          },
+          "userEmailAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "userStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "farmSiteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "farmSiteName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginSave": {
         "type": "object",
         "properties": {
           "isDeleted": {
@@ -1718,6 +2031,49 @@
         "additionalProperties": false
       },
       "Site": {
+        "type": "object",
+        "properties": {
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "modifiedUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "farmSiteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "farmSiteName": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultPrimaryCropId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cropCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SiteSave": {
         "type": "object",
         "properties": {
           "isDeleted": {

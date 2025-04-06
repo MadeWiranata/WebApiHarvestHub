@@ -73,7 +73,7 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
             Crops obj = new Crops();
             try
             {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.CropId = @id");
+                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.CropId = @id And A.IsDeleted = 0 ");
                 _sql = _sql.Replace("{ORDER BY}", "");
                 _sql = _sql.Replace("{OFFSET}", "");
                 var oList = await MappingRecordToObject(_sql, new { id });
@@ -87,53 +87,13 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
             return obj;
         }
 
-        public async Task<IEnumerable<Crops>> GetByName(string name)
-        {
-            IEnumerable<Crops> oList = Enumerable.Empty<Crops>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.CropCode = @name");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.CropCode");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { name });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
-
-        public async Task<IEnumerable<Crops>> GetByStatus(bool IsDeleted)
-        {
-            IEnumerable<Crops> oList = Enumerable.Empty<Crops>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.IsDeleted = @IsDeleted");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.CropCode");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { IsDeleted });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
-
         public async Task<IEnumerable<Crops>> GetAll()
         {
             IEnumerable<Crops> oList = Enumerable.Empty<Crops>();
 
             try
             {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "");
+                _sql = SQL_TEMPLATE.Replace("{WHERE}", " WHERE A.IsDeleted = 0 ");
                 _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.CropCode");
                 _sql = _sql.Replace("{OFFSET}", "");
 
@@ -200,15 +160,12 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
                 throw;
             }
         }
-
-        public Task Update(Crops obj)
+        public async Task<bool> Delete(int Userid, int CropId)
         {
-            throw new NotImplementedException();
-        }
+            await _context.db.QueryAsync("Update Crops set IsDeleted = 1, ModifiedUserId = @userid, ModifiedDate = @tgl Where CropId = @CropId",
+                    new { tgl = DateTime.Now, userid = Userid, CropId = CropId });
 
-        public Task<Crops> GetByEmail(string email)
-        {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

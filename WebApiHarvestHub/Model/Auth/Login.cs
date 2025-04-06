@@ -12,8 +12,21 @@ namespace WebApiHarvestHub.Model.Master
         public string UserGivenName { get; set; }
         public string UserEmailAddress { get; set; }     
         public string UserStatus { get; set; }         
-        public int FarmSiteId { get; set; }  
-       
+        public int FarmSiteId { get; set; }
+        public string FarmSiteName { get; set; }
+
+    }
+    public class LoginSave : BaseModel
+    {
+        public int UserId { get; set; }
+        public bool IsCustomerUser { get; set; }
+        public string Username { get; set; }
+        public string UserPassword { get; set; }
+        public string UserGivenName { get; set; }
+        public string UserEmailAddress { get; set; }
+        public string UserStatus { get; set; }
+        public int FarmSiteId { get; set; }
+        
     }
 
     public class LoginListFilterBy

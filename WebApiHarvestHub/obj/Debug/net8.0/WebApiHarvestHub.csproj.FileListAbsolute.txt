@@ -42,7 +42,6 @@ C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\obj\Debug\net8.0\s
 C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.WebApiHarvestHub.props
 C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.WebApiHarvestHub.props
 C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\obj\Debug\net8.0\WebApiHa.D4DF353A.Up2Date
 C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\obj\Debug\net8.0\WebApiHarvestHub.dll
 C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\obj\Debug\net8.0\refint\WebApiHarvestHub.dll
@@ -59,3 +58,5 @@ C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\bin\Debug\net8.0\M
 C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\bin\Debug\net8.0\MimeKit.dll
 C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\bin\Debug\net8.0\NETCore.MailKit.dll
 C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\obj\Debug\net8.0\WebApiHarvestHub.sourcelink.json
+C:\Users\madea\source\repos\WebApiHarvestHub\WebApiHarvestHub\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

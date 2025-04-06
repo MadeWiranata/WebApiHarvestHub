@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "WebApiHarvestHub.Controllers.Master.CropsController",
+    "Method": "Delete",
+    "RelativePath": "HarvestHubApi/Crops/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "del",
+        "Type": "WebApiHarvestHub.Model.Master.DeleteCrops",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApiHarvestHub.Controllers.Master.CropsController",
     "Method": "GetAll",
     "RelativePath": "HarvestHubApi/Crops/get_all",
     "HttpMethod": "GET",
@@ -106,13 +122,29 @@
     "ContainingType": "WebApiHarvestHub.Controllers.Master.CropsController",
     "Method": "Update",
     "RelativePath": "HarvestHubApi/Crops/update",
-    "HttpMethod": "POST",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "obj",
         "Type": "WebApiHarvestHub.Model.Master.Crops",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApiHarvestHub.Controllers.Master.FieldController",
+    "Method": "Delete",
+    "RelativePath": "HarvestHubApi/Field/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "del",
+        "Type": "WebApiHarvestHub.Model.Master.DeleteField",
         "IsRequired": true
       }
     ],
@@ -225,7 +257,7 @@
     "ContainingType": "WebApiHarvestHub.Controllers.Master.FieldController",
     "Method": "Update",
     "RelativePath": "HarvestHubApi/Field/update",
-    "HttpMethod": "POST",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -257,7 +289,7 @@
     "ContainingType": "WebApiHarvestHub.Controllers.Master.LoginController",
     "Method": "Delete",
     "RelativePath": "HarvestHubApi/Login/delete",
-    "HttpMethod": "POST",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -398,7 +430,7 @@
     "Parameters": [
       {
         "Name": "obj",
-        "Type": "WebApiHarvestHub.Model.Master.Login",
+        "Type": "WebApiHarvestHub.Model.Master.LoginSave",
         "IsRequired": true
       }
     ],
@@ -408,13 +440,29 @@
     "ContainingType": "WebApiHarvestHub.Controllers.Master.LoginController",
     "Method": "Update",
     "RelativePath": "HarvestHubApi/Login/update",
-    "HttpMethod": "POST",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "obj",
-        "Type": "WebApiHarvestHub.Model.Master.Login",
+        "Type": "WebApiHarvestHub.Model.Master.LoginSave",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApiHarvestHub.Controllers.Master.SiteController",
+    "Method": "Delete",
+    "RelativePath": "HarvestHubApi/Site/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "del",
+        "Type": "WebApiHarvestHub.Model.Master.DeleteSite",
         "IsRequired": true
       }
     ],
@@ -517,7 +565,7 @@
     "Parameters": [
       {
         "Name": "obj",
-        "Type": "WebApiHarvestHub.Model.Master.Site",
+        "Type": "WebApiHarvestHub.Model.Master.SiteSave",
         "IsRequired": true
       }
     ],
@@ -527,13 +575,29 @@
     "ContainingType": "WebApiHarvestHub.Controllers.Master.SiteController",
     "Method": "Update",
     "RelativePath": "HarvestHubApi/Site/update",
-    "HttpMethod": "POST",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "obj",
-        "Type": "WebApiHarvestHub.Model.Master.Site",
+        "Type": "WebApiHarvestHub.Model.Master.SiteSave",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApiHarvestHub.Controllers.Master.TaskTypesController",
+    "Method": "Delete",
+    "RelativePath": "HarvestHubApi/TaskTypes/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "del",
+        "Type": "WebApiHarvestHub.Model.Master.DeleteTaskTypes",
         "IsRequired": true
       }
     ],
@@ -646,13 +710,29 @@
     "ContainingType": "WebApiHarvestHub.Controllers.Master.TaskTypesController",
     "Method": "Update",
     "RelativePath": "HarvestHubApi/TaskTypes/update",
-    "HttpMethod": "POST",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "obj",
         "Type": "WebApiHarvestHub.Model.Master.TaskTypes",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApiHarvestHub.Controllers.Master.WorkTaskController",
+    "Method": "Delete",
+    "RelativePath": "HarvestHubApi/WorkTask/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "del",
+        "Type": "WebApiHarvestHub.Model.Master.DeleteWorksTask",
         "IsRequired": true
       }
     ],
@@ -765,7 +845,7 @@
     "ContainingType": "WebApiHarvestHub.Controllers.Master.WorkTaskController",
     "Method": "Update",
     "RelativePath": "HarvestHubApi/WorkTask/update",
-    "HttpMethod": "POST",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [

@@ -74,7 +74,7 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
 
             try
             {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.FarmFieldId = @id");
+                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.FarmFieldId = @id and A.IsDeleted = 0 ");
                 _sql = _sql.Replace("{ORDER BY}", "");
                 _sql = _sql.Replace("{OFFSET}", "");
                 var oList = await MappingRecordToObject(_sql, new { id });
@@ -88,53 +88,13 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
             return obj;
         }
 
-        public async Task<IEnumerable<Field>> GetByName(string name)
-        {
-            IEnumerable<Field> oList = Enumerable.Empty<Field>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.FarmFieldName = @name");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.FarmFieldName");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { name });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
-
-        public async Task<IEnumerable<Field>> GetByStatus(bool IsDeleted)
-        {
-            IEnumerable<Field> oList = Enumerable.Empty<Field>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.IsDeleted = @IsDeleted");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.FarmFieldName");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { IsDeleted });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
-
         public async Task<IEnumerable<Field>> GetAll()
         {
             IEnumerable<Field> oList = Enumerable.Empty<Field>();
 
             try
             {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "");
+                _sql = SQL_TEMPLATE.Replace("{WHERE}", " WHERE A.IsDeleted = 0 ");
                 _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.FarmFieldName");
                 _sql = _sql.Replace("{OFFSET}", "");
 
@@ -205,6 +165,13 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
                 _context.Rollback();
                 throw;
             }
+        }
+        public async Task<bool> Delete(int Userid, int FarmFieldId)
+        {
+            await _context.db.QueryAsync("Update FarmFields set IsDeleted = 1, ModifiedUserId = @userid, ModifiedDate = @tgl Where FarmFieldId = @FarmFieldId",
+                    new { tgl = DateTime.Now, userid = Userid, FarmFieldId = FarmFieldId });
+
+            return true;
         }
     }
 }

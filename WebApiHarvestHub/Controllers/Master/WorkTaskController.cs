@@ -164,7 +164,7 @@ namespace WebApiHarvestHub.Controllers.Master
         }
 
         [Authorize(Policy = "RequireAdmin")]
-        [HttpPost("update")]
+        [HttpPut("update")]
         public async Task<IActionResult> Update(WorkTaskSave obj)
         {
             string userby = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
@@ -185,6 +185,27 @@ namespace WebApiHarvestHub.Controllers.Master
             {
                 var st = StTrans.SetSt(400, 0, e.Message);
                 return BadRequest(new { Status = st });
+            }
+        }
+        [Authorize(Policy = "RequireAdmin")]
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete(DeleteWorksTask del)
+        {
+            try
+            {
+                using (_context = new DapperContext())
+                {
+                    _uow = new UnitOfWork(_context);
+                    await _uow.WorkTaskRepo.Delete(del.UserId, del.WorkTaskId);
+                }
+
+                var st = StTrans.SetSt(200, 0, "Succes");
+                return Ok(new { Status = st, Results = del });
+            }
+            catch (System.Exception e)
+            {
+                var st = StTrans.SetSt(400, 0, e.Message);
+                return Ok(new { Status = st });
             }
         }
     }

@@ -11,8 +11,8 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
 {
     public class LoginRepo : ILoginRepo
     {
-        private const string SQL_TEMPLATE = @"SELECT A.UserId,A.IsCustomerUser,A.Username,A.UserPassword,A.UserGivenName,A.UserEmailAddress
-                                              FROM [dbo].Users A
+        private const string SQL_TEMPLATE = @"SELECT *
+                                              FROM [dbo].vwUsers A
                                               {WHERE}
                                               {ORDER BY}
                                               {OFFSET}";
@@ -78,7 +78,7 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
 
             try
             {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.UserId = @UserId");
+                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.UserId = @UserId And A.IsDeleted = 0 ");
                 _sql = _sql.Replace("{ORDER BY}", "");
                 _sql = _sql.Replace("{OFFSET}", "");
                 var oList = await MappingRecordToObject(_sql, new { UserId });
@@ -92,44 +92,6 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
             return obj;
         }
 
-        public async Task<IEnumerable<Login>> GetByName(string name)
-        {
-            IEnumerable<Login> oList = Enumerable.Empty<Login>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.Username = @name");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.Username");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { name });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
-        public async Task<IEnumerable<Login>> GetByStatus(bool Active)
-        {
-            IEnumerable<Login> oList = Enumerable.Empty<Login>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.IsDeleted = @Active");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.Username");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { Active });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
      
         public async Task<IEnumerable<Login>> GetAllFilterBy(LoginListFilterBy obj, string sortBy, bool ascending)
         {
@@ -156,15 +118,14 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
             return oList;
         }    
 
-        public async Task<Login> Save(Login obj)
+        public async Task<LoginSave> Save(LoginSave obj)
         {
             try
             {
                 _context.BeginTransaction();
                 _transaction = _context.transaction;
                 var pass = CreatePasswordHash(obj.UserPassword, obj.UserPassword);
-
-                var data = await _context.db.QueryFirstOrDefaultAsync<Login>("[dbo].sp_login_save", new
+                var data = await _context.db.QueryFirstOrDefaultAsync<LoginSave>("[dbo].sp_login_save", new
                 {
                     UserId = obj.UserId,
                     IsCustomerUser = obj.IsCustomerUser,
@@ -215,25 +176,13 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
             return true;
         }
 
-        public Task Delete(Login obj)
-        {
-            throw new System.NotImplementedException();
-        }
         public async Task<bool> Delete(int UserId)
         {
             await _context.db.QueryAsync("Update Users set IsDeleted = 1, ModifiedUserId = @userid, ModifiedDate = @tgl Where UserId = @userid",
                     new { tgl = DateTime.Now, userid = UserId });
 
             return true;
-        }
-
-        public async Task Update(Login obj)
-        {
-            await _context.db.QueryAsync("Update Users SET IsActive = @IsActive, ModifiedUserId = @users, ModifiedDate = @tgl Where Username = @userid",
-                new { IsDeleted = @obj.IsDeleted, users = obj.ModifiedUserId, tgl = DateTime.Now, username = obj.Username }
-            );
-        }
-      
+        }     
 
         private bool VerifyPassword(string pass, string password)
         {
@@ -283,7 +232,7 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
 
             try
             {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "");
+                _sql = SQL_TEMPLATE.Replace("{WHERE}", "  WHERE A.IsDeleted = 0 ");
                 _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.Username");
                 _sql = _sql.Replace("{OFFSET}", "");
 

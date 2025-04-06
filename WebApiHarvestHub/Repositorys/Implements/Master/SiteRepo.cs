@@ -10,9 +10,8 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
 {
     public class SiteRepo:ISiteRepo
     {
-        private const string SQL_TEMPLATE = @"SELECT A.FarmSiteId, A.FarmSiteName, A.CreatedDate, A.CreatedUserId, A.ModifiedDate
-                                              , A.ModifiedUserId, A.DefaultPrimaryCropId, A.IsDeleted
-                                              FROM [dbo].FarmSites A
+        private const string SQL_TEMPLATE = @"SELECT *
+                                              FROM [dbo].vwFarmSites A
                                               {WHERE}
                                               {ORDER BY}
                                               {OFFSET}";
@@ -76,7 +75,7 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
 
             try
             {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.FarmSiteId = @id");
+                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.FarmSiteId = @id and A.IsDeleted = 0 ");
                 _sql = _sql.Replace("{ORDER BY}", "");
                 _sql = _sql.Replace("{OFFSET}", "");
                 var oList = await MappingRecordToObject(_sql, new { id });
@@ -90,53 +89,13 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
             return obj;
         }
 
-        public async Task<IEnumerable<Site>> GetByName(string name)
-        {
-            IEnumerable<Site> oList = Enumerable.Empty<Site>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.FarmSiteName = @name");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.FarmSiteName");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { name });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
-
-        public async Task<IEnumerable<Site>> GetByStatus(bool IsDeleted)
-        {
-            IEnumerable<Site> oList = Enumerable.Empty<Site>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.IsDeleted = @IsDeleted");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.FarmSiteName");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { IsDeleted });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
-
         public async Task<IEnumerable<Site>> GetAll()
         {
             IEnumerable<Site> oList = Enumerable.Empty<Site>();
 
             try
             {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "");
+                _sql = SQL_TEMPLATE.Replace("{WHERE}", " WHERE A.IsDeleted = 0 ");
                 _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.FarmSiteName");
                 _sql = _sql.Replace("{OFFSET}", "");
 
@@ -176,13 +135,13 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
             return oList;
         }     
 
-        public async Task<Site> Save(Site obj)
+        public async Task<SiteSave> Save(SiteSave obj)
         {
             try
             {
                 _context.BeginTransaction();
                 _transaction = _context.transaction;
-                var data = await _context.db.QueryFirstOrDefaultAsync<Site>("[dbo].sp_site_save", new
+                var data = await _context.db.QueryFirstOrDefaultAsync<SiteSave>("[dbo].sp_site_save", new
                 {
                     FarmSiteId = obj.FarmSiteId,
                     FarmSiteName = obj.FarmSiteName,
@@ -204,15 +163,13 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
                 throw;
             }
         }
-
-        public Task Update(Site obj)
+     
+        public async Task<bool> Delete(int Userid, int FarmSiteId)
         {
-            throw new NotImplementedException();
-        }
+            await _context.db.QueryAsync("Update FarmSites set IsDeleted = 1, ModifiedUserId = @userid, ModifiedDate = @tgl Where FarmSiteId = @FarmSiteId",
+                    new { tgl = DateTime.Now, userid = Userid, FarmSiteId = FarmSiteId });
 
-        public Task<Site> GetByEmail(string email)
-        {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

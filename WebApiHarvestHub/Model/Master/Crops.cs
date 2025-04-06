@@ -13,4 +13,9 @@ namespace WebApiHarvestHub.Model.Master
         public string CropCode { get; set; }
         public bool? IsDeleted { get; set; }
     }
+    public class DeleteCrops
+    {
+        public int UserId { get; set; }
+        public int CropId { get; set; }
+    }
 }

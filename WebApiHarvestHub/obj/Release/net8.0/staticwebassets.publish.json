@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "QKni7vGPDeRql3XvoczMt+LbqV+Z7hSeGDbi199ndzE=",
+  "Source": "WebApiHarvestHub",
+  "BasePath": "_content/WebApiHarvestHub",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

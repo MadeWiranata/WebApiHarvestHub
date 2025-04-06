@@ -15,8 +15,9 @@ using Microsoft.AspNetCore.Http;
 namespace WebApiHarvestHub.Controllers.Master
 {
    
-    public interface ILoginController : IBaseApiController<Login>
+    public interface ILoginController : IBaseApiController<LoginSave>
     {
+        Task<IActionResult> GetByID(int id);
         Task<IActionResult> GetAllFilterBy(string statusName,
                                 bool? isActive,
                                 string sortBy, bool ascending);  
@@ -41,11 +42,11 @@ namespace WebApiHarvestHub.Controllers.Master
 
         [Authorize(Policy = "RequireAdmin")]
         [HttpPost("Save")]
-        public async Task<IActionResult> Save(Login obj)
+        public async Task<IActionResult> Save(LoginSave obj)
         {       
             try
             {
-                var results = new Login();
+                var results = new LoginSave();
                 using (_context = new DapperContext())
                 {
                     _uow = new UnitOfWork(_context);                 
@@ -65,12 +66,12 @@ namespace WebApiHarvestHub.Controllers.Master
 
 
         [Authorize(Policy = "RequireAdmin")]
-        [HttpPost("update")]
-        public async Task<IActionResult> Update(Login obj)
+        [HttpPut("update")]
+        public async Task<IActionResult> Update(LoginSave obj)
         {         
             try
             {
-                var results = new Login();
+                var results = new LoginSave();
                 using (_context = new DapperContext())
                 {
                     _uow = new UnitOfWork(_context);                
@@ -115,8 +116,7 @@ namespace WebApiHarvestHub.Controllers.Master
         [Authorize(Policy = "RequireAdmin")]
         [HttpPost("ResetPassword")]
         public async Task<IActionResult> ResetPassword(ResetPassword cur)
-        {
-            string userby = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+        {     
             try
             {
 
@@ -142,7 +142,6 @@ namespace WebApiHarvestHub.Controllers.Master
         {
             try
             {
-                //
                 var dt = new ListUser();
                 using (_context = new DapperContext())
                 {
@@ -242,7 +241,7 @@ namespace WebApiHarvestHub.Controllers.Master
         }
 
 
-        [AllowAnonymous]
+        [Authorize(Policy = "RequireAdmin")]
         [HttpGet("get_all_filter_by")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Login>))]
         public async Task<IActionResult> GetAllFilterBy(string username, bool? IsDeleleted, string sortBy, bool ascending)
@@ -316,10 +315,9 @@ namespace WebApiHarvestHub.Controllers.Master
         }
 
         [Authorize(Policy = "RequireAdmin")]
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> Delete(DeleteUser cur)
-        {
-            string userby = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+        {      
             try
             {
 

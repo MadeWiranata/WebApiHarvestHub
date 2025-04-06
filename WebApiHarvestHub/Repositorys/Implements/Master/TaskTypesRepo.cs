@@ -74,7 +74,7 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
 
             try
             {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.WorkTaskTypeCode = @id");
+                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.WorkTaskTypeCode = @id And A.IsDeleted = 0 ");
                 _sql = _sql.Replace("{ORDER BY}", "");
                 _sql = _sql.Replace("{OFFSET}", "");
                 var oList = await MappingRecordToObject(_sql, new { id });
@@ -86,47 +86,7 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
             }
 
             return obj;
-        }
-
-        public async Task<IEnumerable<TaskTypes>> GetByName(string name)
-        {
-            IEnumerable<TaskTypes> oList = Enumerable.Empty<TaskTypes>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.WorkTaskSatusCode = @name");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.WorkTaskSatusCode");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { name });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
-
-        public async Task<IEnumerable<TaskTypes>> GetByStatus(bool IsDeleted)
-        {
-            IEnumerable<TaskTypes> oList = Enumerable.Empty<TaskTypes>();
-
-            try
-            {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "WHERE A.IsDeleted = @IsDeleted");
-                _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.WorkTaskSatusCode");
-                _sql = _sql.Replace("{OFFSET}", "");
-
-                oList = await MappingRecordToObject(_sql, new { IsDeleted });
-            }
-            catch (System.Exception ex)
-            {
-                throw new System.Exception(ex.Message);
-            }
-
-            return oList;
-        }
+        } 
 
         public async Task<IEnumerable<TaskTypes>> GetAll()
         {
@@ -134,7 +94,7 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
 
             try
             {
-                _sql = SQL_TEMPLATE.Replace("{WHERE}", "");
+                _sql = SQL_TEMPLATE.Replace("{WHERE}", " WHERE A.IsDeleted = 0 ");
                 _sql = _sql.Replace("{ORDER BY}", "ORDER BY A.WorkTaskSatusCode");
                 _sql = _sql.Replace("{OFFSET}", "");
 
@@ -201,15 +161,12 @@ namespace WebApiHarvestHub.Repositorys.Implements.Master
                 throw;
             }
         }
-
-        public Task Update(TaskTypes obj)
+        public async Task<bool> Delete(int Userid, int WorkTaskTypeCode)
         {
-            throw new NotImplementedException();
-        }
+            await _context.db.QueryAsync("Update WorkTaskTypes set IsDeleted = 1, ModifiedUserId = @userid, ModifiedDate = @tgl Where WorkTaskTypeCode = @WorkTaskTypeCode",
+                    new { tgl = DateTime.Now, userid = Userid, WorkTaskTypeCode = WorkTaskTypeCode });
 
-        public Task<TaskTypes> GetByEmail(string email)
-        {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
